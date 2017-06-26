@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title></title>
+	<script type="text/javascript" src="../js/constant.js"></script>
+	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<style>
+		html {
+			background-color: blue;
+		}
+		body {
+			background-color: aquamarine;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="a1"></div>
+	<div id="a2">aaa</div>
+	<script>
+		console.log("aaaaaaaaaa!cc! ddd|fff!|bbb".replace(/[!\| ]*/g, ""));
+		console.log(typeof "aaa");
+		console.log(typeof 1);
+		console.log(typeof null);
+		console.log(typeof a);
+		console.log(typeof $("#a2"));
+
+		function isEmptyObject1(obj) {
+			for(var key in obj) {
+				return false;
+			}
+			return true;
+		}
+		console.log(document.getElementById("aaaa"));
+	</script>
+</body>
+
+</html>

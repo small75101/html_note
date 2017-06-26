@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<a href="javascript:void(0)" onclick="submit()">aa</a>
+		<script>
+			function request(url, typeid, data) {
+				console.log(typeid);
+				var extendMsg;
+				if(data) {
+					var str = "";
+					for(var i = 0; i < data.length - 1; i++) {
+						if((typeof data[i]) == 'string') {
+							data[i] = data[i].replace(/\|/g, "");
+							data[i] = data[i].replace(/\!/g, "");
+						} else if((typeof data[i]) == 'number') {
+							data[i] = data[i] + "";
+						}
+						data[i] = data[i] || '';
+						str += data[i] + '!'
+					}
+					extendMsg = str + data[data.length - 1];
+				} else {
+					extendMsg = "0";
+				}
+				console.log("需要采集的数据:" + extendMsg);
+			}
+
+			function submit() {
+				request("a.html", 0x89, [1, 0, 3, 4, "6", "8", new Date()]);
+			}
+		</script>
+	</body>
+
+</html>

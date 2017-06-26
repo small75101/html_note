@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Thymeleaf tutorial: exercise 2</title>
+	<meta charset="utf-8" />
+	<script type="text/javascript" src="../js/lang.js"></script>
+</head>
+
+<body>
+	<h1>Thymeleaf tutorial - Answer for exercise 1: bean values</h1>
+	<h2>Product information</h2>
+	<dl>
+		<dt id="hi">Product name</dt>
+		<dd th:text="${product.description}">Red Chair</dd>
+
+		<dt id="hello">Product price</dt>
+		<dd th:text="${product.price}">350</dd>
+
+		<dt>Product available from</dt>
+		<dd th:text="${product.availableFrom}">2014-12-01</dd>
+
+	</dl>
+</body>
+<script>
+	var template1 = "我是{0}，今年{1}了";
+	var result1 = template1.format(["loogn", 22]);
+	console.log(result1);
+	var template2 = "我是{name}，今年{age}了";
+	var result2 = template2.format({
+		name: "loogn",
+		age: 22
+	});
+	console.log(result2);
+	console.log("{0},{1},{2},hehe".format(["hello", "world", "a"])); //hello,world,hehe)
+
+	var hi = document.getElementById("hi");
+	var hello = document.getElementById("hello");
+	css(hi, "color", "red")
+	css([hi, hello], "color", "red")
+	css(hi, {
+		"border": "1px solid #000",
+		"width": "200px"
+	})
+	var color = css(hi, "border");
+	console.log(color);
+	var a = {};
+	alert(a instanceof Object);
+</script>
+
+</html>

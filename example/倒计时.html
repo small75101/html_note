@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>倒计时</title>
+	</head>
+	<body>
+		<div>永久保存:<br>
+		小时:<input id="input-session-hour" type="number"/>分:<input id="input-session-minue" type="number" />
+		<input id="input-sure" type="button" value="保存" onclick="saveTime()"/>	
+		<input id="input-sure" type="button" value="重置" onclick="setret()"/>
+		</div>
+		<div>临时计算:<br>
+		小时:<input id="input-hour" type="number"/>分:<input id="input-minue" type="number" />
+		<input id="input-sure" type="button" value="确认" onclick="changeLast()"/>
+		</div>
+		<div id="demo"></div>
+		<div id="demo1"></div>
+		<div id="msg" style="color:red;"><div>
+		<script>
+			var vHour =  parseInt(getCookie("input-hour")?getCookie("input-hour"):17);
+			var vMinute =  parseInt(getCookie("input-minue")?getCookie("input-minue"):30);
+			var vAllMinute = vHour*60+vMinute;
+			var vCurrentMinute = -1;
+			(function showTime02(){
+				console.log(getCookie("input-hour"));
+				document.getElementById("input-hour").value= vHour;
+				document.getElementById("input-minue").value= vMinute;
+				document.getElementById("input-session-hour").value= vHour;
+				document.getElementById("input-session-minue").value= vMinute;
+				setTime(true);
+				setInterval(setTime,1000);
+			})();
+			function saveTime(){
+				var input_hour = document.getElementById("input-session-hour");
+				if(input_hour.value==''||(input_hour.value<0||input_hour.value>=24)){alert("请输入正确小时");return;}
+				var input_minue = document.getElementById("input-session-minue");
+				if(input_minue.value==''||(input_minue.value<0||input_minue.value>=60)){alert("请输入正确分钟");return;}
+				vHour = input_hour.value;
+				vMinute = input_minue.value;
+				setCookie("input-hour",input_hour.value);
+				setCookie("input-minue",input_minue.value);
+				console.log(getCookie("input-hour"));
+				document.getElementById("msg").innerHTML="保存成功";
+				vAllMinute = parseInt(input_hour.value*60)+parseInt(input_minue.value);
+				setTime(true);
+			}
+			function setTime(isForse){
+				var date = new Date();
+				var hour = date.getHours();
+				var minute = date.getMinutes();
+				minute = minute < 10 ? ('0' + minute) : minute;
+				var s = date.getSeconds();
+				s = s < 10 ? ('0' + s) : s;
+				document.getElementById("demo").innerHTML = hour + ':' + minute + ":" + s;
+				if(vCurrentMinute != minute||isForse){
+					showLastTime(hour,minute);
+					vCurrentMinute = minute;
+				}
+			}
+			function showLastTime(hour,minute){
+				var tHour = vAllMinute - hour*60 - minute;
+				if(tHour>0){
+					tHour = Math.floor(tHour/60);
+					var tMinute = (vAllMinute - hour*60 - minute) - tHour*60;
+					document.getElementById("demo1").innerHTML = '距离('+(Math.floor(vAllMinute/60))+':'+(vAllMinute-Math.floor(vAllMinute/60)*60)+'):\n'+(tHour>0?tHour+'个小时':'')+tMinute+'分';
+				}
+			}
+			function changeLast(){
+				var input_hour = document.getElementById("input-hour");
+				if(input_hour.value==''||(input_hour.value<0||input_hour.value>=24)){alert("请输入正确小时");return;}
+				var input_minue = document.getElementById("input-minue");
+				if(input_minue.value==''||(input_minue.value<0||input_minue.value>=60)){alert("请输入正确分钟");return;}
+				vAllMinute = parseInt(input_hour.value*60)+parseInt(input_minue.value);
+				setTime(true);
+			}
+			function setret(){
+				vAllMinute = vHour*60+vMinute;
+				setTime(true);
+			}
+			
+			function setCookie(name,value){
+				var Days = 365;
+				var exp = new Date();
+				exp.setTime(exp.getTime() + Days*24*60*60*1000);
+				document.cookie = name + "="+ escape (value) + ";expires=" + exp.toGMTString();
+			}
+			function getCookie(name){
+				var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
+				if(arr=document.cookie.match(reg))
+				return unescape(arr[2]);
+				else
+				return null;
+			}
+			function delCookie(name){
+				var exp = new Date();
+				exp.setTime(exp.getTime() - 1);
+				var cval=getCookie(name);
+				if(cval!=null)
+				document.cookie= name + "="+cval+";expires="+exp.toGMTString();
+			}
+		</script>
+	</body>
+</html>

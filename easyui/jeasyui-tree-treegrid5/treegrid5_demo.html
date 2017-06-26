@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="keywords" content="jquery,ui,easy,easyui,web">
+	<meta name="description" content="easyui help you build your web page easily!">
+	<title>Lazy loading nodes in TreeGrid - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="http://www.jeasyui.net/Public/js/easyui/demo/demo.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.1.min.js"></script>
+	<script type="text/javascript" src="http://www.jeasyui.net/Public/js/easyui/jquery.easyui.min.js"></script>
+</head>
+<body>
+	<h2>Lazy loading nodes in TreeGrid</h2>
+	<div class="demo-info" style="margin-bottom:10px">
+		<div class="demo-tip icon-tip">&nbsp;</div>
+		<div>This example shows how to use lazy loading in TreeGrid.</div>
+	</div>
+	
+	<table id="test" title="Lazy Loading" class="easyui-treegrid" style="width:700px;height:300px"
+			data-options="
+				url: 'data/treegrid_data.json',
+				method: 'get',
+				rownumbers: true,
+				idField: 'id',
+				treeField: 'name',
+				loadFilter: myLoadFilter
+			">
+		<thead>
+			<tr>
+				<th field="name" width="220">Name</th>
+				<th field="size" width="100" align="right">Size</th>
+				<th field="date" width="150">Modified Date</th>
+			</tr>
+		</thead>
+	</table>
+	<script>
+		function myLoadFilter(data,parentId){
+			function setData(){
+				var todo = [];
+				for(var i=0; i<data.length; i++){
+					todo.push(data[i]);
+				}
+				while(todo.length){
+					var node = todo.shift();
+					if (node.children){
+						node.state = 'closed';
+						node.children1 = node.children;
+						node.children = undefined;
+						todo = todo.concat(node.children1);
+					}
+				}
+			}
+			
+			setData(data);
+			var tg = $(this);
+			var opts = tg.treegrid('options');
+			opts.onBeforeExpand = function(row){
+				if (row.children1){
+					tg.treegrid('append',{
+						parent: row[opts.idField],
+						data: row.children1
+					});
+					row.children1 = undefined;
+					tg.treegrid('expand', row[opts.idField]);
+				}
+				return row.children1 == undefined;
+			};
+			return data;
+		}
+	</script>
+</body>
+</html>

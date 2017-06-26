@@ -1,0 +1,142 @@
+{
+	"errorCode": 0,
+	"errorMsg": "",
+	"data": {
+		"wiki": {
+			"id": "543605ec2dd6fc8412de4e5a",
+			"title": "正义红师",
+			"model": "teleplay",
+			"desc": "《正义红师》是由中国人民解放军八一电影制片厂和深圳市方块动漫画文化发展有限公司联合出品的二维加三维高水准动画。这部国内首部以科幻军事题材为背景的动画片，主要讲述中国军人在遇到来自外星未知威胁时，使用高新科技武器排除万难、浴血奋战、保卫家园的热血励志故事。",
+			"tags": [
+				"少儿",
+				"剧情",
+				"动作",
+				"科幻",
+				"动画",
+				"儿童",
+				"战争",
+				"冒险"
+			],
+			"info": {
+				"alias": null,
+				"director": [
+					"钱国栋"
+				],
+				"starring": null,
+				"released": "2009",
+				"country": "中国大陆",
+				"language": "普通话",
+				"writer": null,
+				"distributor": null,
+				"episodes": "52",
+				"produced": null,
+				"producer": null,
+				"runtime": null,
+				"hosts": null,
+				"guests": null,
+				"channel": null,
+				"play_time": null
+			},
+			"screens": [
+				{
+					"size": "420*287",
+					"url": "http://10.102.1.89:8081/thumb/420/287/1414392948542.jpg"
+				}
+			],
+			"posters": [
+				{
+					"type": "small",
+					"size": "120*160",
+					"url": "http://10.102.1.89:8081/thumb/120/160/1412826690798.jpg"
+				}, {
+					"type": "big",
+					"size": "240*320",
+					"url": "http://10.102.1.89:8081/thumb/240/320/1412826690798.jpg"
+				}, {
+					"type": "max",
+					"size": "324*480",
+					"url": "http://10.102.1.89:8081/thumb/324/480/1412826690798.jpg"
+				}
+			]
+		},
+		"video": {},
+		"prevPrograms": [],
+		"liveRecommends": [
+			{
+				"channelNumber": 71,
+				"programName": "购物节目",
+				"cover": "http://10.102.1.89:8081/thumb/118/168/",
+				"onId": "1",
+				"tsId": "12",
+				"serviceId": "1202",
+				"playurl": "dvb://1.c.4b2"
+			}
+		],
+		"backPrograms": [
+			{
+				"programName": "北平无战事(31)",
+				"startTime": "2016-12-30 04:49:00.0",
+				"endTime": "2016-12-30 06:01:00.0",
+				"channelId": "555",
+				"channelName": "陕西卫视",
+				"channelNumber": null,
+				"channelLogo": null,
+				"assetId": "1005255169",
+				"providerId": "sctv.com",
+				"providerAssetId": "ABCD5551612300449000",
+				"playurl": "rtsp://10.80.232.13:554/;purchaseToken=;serverID=?AppPath=60010011&asset=sctv.com#ABCD5551612300449000&smartcard-id=8510010421049904&device-id=8510010421049904&home-id=114102616486&purchase-id=&mediatime=0&streamtransportmode=ip&ipvodservicegroupid=102",
+				"productOfferingUid": "9",
+				"programId": "5551612300449000",
+				"providerName": "sctv",
+				"duration": "-4320",
+				"entryName": "北平无战事(31)"
+			}, {
+				"programName": "北平无战事(30)",
+				"startTime": "2016-12-25 01:05:01.0",
+				"endTime": "2016-12-25 01:50:20.0",
+				"channelId": "555",
+				"channelName": "陕西卫视",
+				"channelNumber": null,
+				"channelLogo": null,
+				"assetId": "1005238868",
+				"providerId": "sctv.com",
+				"providerAssetId": "ABCD5551612250105010",
+				"playurl": "rtsp://10.80.232.13:554/;purchaseToken=;serverID=?AppPath=60010011&asset=sctv.com#ABCD5551612250105010&smartcard-id=8510010421049904&device-id=8510010421049904&home-id=114102616486&purchase-id=&mediatime=0&streamtransportmode=ip&ipvodservicegroupid=102",
+				"productOfferingUid": "9",
+				"programId": "5551612250105010",
+				"providerName": "sctv",
+				"duration": "-2719",
+				"entryName": "北平无战事(30)"
+			}
+		],
+		"vods": [
+			{
+				"wikiId": "4d007de12f2a241bd7000153",
+				"title": "海棠依旧",
+				"cover": "http://10.102.1.89:8081/thumb/118/168/1405418541107.jpg"
+			}, {
+				"wikiId": "5658092635db5ecd1a8b4568",
+				"title": "炮神",
+				"cover": "http://10.102.1.89:8081/thumb/118/168/1448610068662.jpg"
+			}, {
+				"wikiId": "57a197ab35db5ecc468d5ff7",
+				"title": "锻刀",
+				"cover": "http://10.102.1.89:8081/thumb/118/168/1475908194566.jpg"
+			}, {
+				"wikiId": "577338f935db5ebe468c83a7",
+				"title": "黄金血道",
+				"cover": "http://10.102.1.89:8081/thumb/118/168/1467168992938.jpg"
+			}, {
+				"wikiId": "4d007de12f2a241bd7000153",
+				"title": "海棠依旧",
+				"cover": "http://10.102.1.89:8081/thumb/118/168/1405418541107.jpg"
+			}, {
+				"wikiId": "5658092635db5ecd1a8b4568",
+				"title": "炮神",
+				"cover": "http://10.102.1.89:8081/thumb/118/168/1448610068662.jpg"
+			}
+		]
+	},
+	"errorDetail": "",
+	"pageInfo": null
+}

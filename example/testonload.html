@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+
+<body>
+	<div id="div1">div1</div>
+	<script>
+		window.onbeforeunload = onbeforeunload_handler;
+		window.onunload = onunload_handler;
+
+		function onbeforeunload_handler(e) {
+			  console.log("onbeforeunload_handler");
+			  var n = window.event.screenX - window.screenLeft;   
+              var b = n > document.documentElement.scrollWidth-20;   
+              if(b && window.event.clientY < 0 || window.event.altKey)   
+              {   
+                     alert("是关闭而非刷新");   
+                     window.event.returnValue = ""; //这里可以放置你想做的操作代码   
+              }   
+			var warning = "确认退出?";
+			return warning;
+		}
+
+		function onunload_handler() {
+			console.log("onunload_handler");
+			var warning = "谢谢光临";
+			alert(warning);
+			return warning;
+		}
+	</script>
+</body>
+
+</html>

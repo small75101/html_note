@@ -1,0 +1,16 @@
+*{margin:0;padding:0}
+
+.img_slogan{display:block;width:450px;height:235px; background:url(../images/slogan_dark.png) no-repeat; _background:url(../images/slogan_dark_ie6.png) no-repeat;}
+
+.lay_wrap{color:#4b4a4a;height:100%;position:relative;min-height:600px}
+.lay_wrap a{color:#4b4a4a}
+.lay_wrap a:hover{text-decoration:underline}
+.lay_wrap .lay_inner{width:750px;margin:0 auto;position:relative}
+.lay_wrap .lay_main{color:#4b4a4a;position:absolute;top:10%;width:100%; _top:50px;}
+.lay_wrap .lay_main a{color:#4b4a4a}
+.lay_wrap .lay_main .login_head{margin-bottom:50px}
+.lay_wrap .lay_main .login_img{float:left;width:450px;overflow:hidden;height:235px}
+.lay_background{position:absolute;left:0;top:0;z-index:-1;overflow:hidden}
+.lay_background .lay_background_img{position:absolute;left:0;top:0;z-index:-1}
+.lay_background .lay_background_img{opacity:0;-webkit-transition:opacity .8s ease;-moz-transition:opacity .8s ease;transition:opacity .8s ease}
+.lay_background .lay_background_img_fade_out{opacity:1}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="data/angular.min.js"></script>
+	</head>
+
+	<body>
+
+		<div ng-app="myApp"  ng-controller="myCtrl1">
+
+			名: <input type="text" ng-model="firstName" /><br/> 
+			姓: <input type="text" ng-model="lastName" /><br/> 
+			姓名: {{ firstName + " " + lastName}}<br/>
+			allName: <span ng-bind="allName"></span><br/>
+			<p>循环对象：</p>
+			<ul>
+				<li ng-repeat="x in names">
+					{{ x.name + ', ' + x.country }}
+				</li>
+			</ul>
+			<runoob-directive></runoob-directive>
+			<div runoob-directive></div>
+			<!-- directive: runoob-directive -->
+		</div>
+	</body>
+
+</html>

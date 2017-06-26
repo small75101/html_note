@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Jquery：鼠标拖动DIV</title>
+<style type="text/css">
+  div#computerMove{
+    position:absolute;
+    top:50px;
+    left:50px;
+    width:200px;
+    height:30px;
+    line-height:30px;
+    background-color:#00CCCC;
+    text-align:center;
+    color:#FFFFFF;
+    cursor:default;
+  }
+</style>
+</head>
+<body>
+  <div id="computerMove">点击我拖动</div>
+  <script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(document).ready(function(){
+      var $div = $("div#computerMove");
+      /* 绑定鼠标左键按住事件 */
+      $div.bind("mousedown",function(event){
+        /* 获取需要拖动节点的坐标 */
+        var offset_x = $(this)[0].offsetLeft;//x坐标
+        var offset_y = $(this)[0].offsetTop;//y坐标
+        /* 获取当前鼠标的坐标 */
+        var mouse_x = event.pageX;
+        var mouse_y = event.pageY;
+        /* 绑定拖动事件 */
+        /* 由于拖动时，可能鼠标会移出元素，所以应该使用全局（document）元素 */
+        $(document).bind("mousemove",function(ev){
+          /* 计算鼠标移动了的位置 */
+          var _x = ev.pageX - mouse_x;
+          var _y = ev.pageY - mouse_y;
+          /* 设置移动后的元素坐标 */
+          var now_x = (offset_x + _x ) + "px";
+          var now_y = (offset_y + _y ) + "px";
+          /* 改变目标元素的位置 */
+          $div.css({
+            top:now_y,
+            left:now_x
+          });
+        });
+      });
+      /* 当鼠标左键松开，接触事件绑定 */
+      $(document).bind("mouseup",function(){
+        $(this).unbind("mousemove");
+      });
+    })
+  </script>
+</body>
+</html>

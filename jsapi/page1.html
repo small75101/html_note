@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+</head>
+
+<body>
+</body>
+
+<script type="text/javascript">
+	function extend(obj) {
+		var obj2 = new Object();
+		for(var x in obj) {
+			obj2[x] = obj[x];
+		}
+		return obj2;
+	}
+	var data = [{
+		id: 1,
+		name: "张三",
+		age: 01
+	}, {
+		id: 2,
+		name: "张三2",
+		age: 02
+	}, {
+		id: 3,
+		name: "张三3",
+		age: 03
+	}];
+	var data2 = [{
+		id: 1,
+		name: "张三",
+		age: 01
+	}, {
+		id: 2,
+		name: "张三2",
+		age: 02
+	}];
+
+	var res3 = new Page(data, 2, 2);
+	//res3.init(data, 2, 2);
+	console.log(res3);
+	console.log(res3.getCurrentObj());
+
+	var res2 = new Page();
+	res2.init(data, 1, 2);
+	console.log(res2);
+	console.log(res2.getCurrentObj());
+
+	var res4 = new Page();
+	res4.init(data2, 1, 2);
+	console.log(res4);
+	console.log("=============================");
+	console.log(res4.getCurrentObj());
+
+	function Page(allData, pageSize, currentPage) {
+		if(typeof Page.prototype._initialized == "undefined") {
+			var re = {};
+			var result = createObj.call(re);
+			console.log(re);
+			console.log(result);
+			for(var x in result) {
+				Page.prototype[x] = result[x];
+			}
+			Page.prototype._initialized = true;
+		}
+		if(arguments.length >= 1)
+			this.init(allData, pageSize, currentPage);
+
+		function createObj() {
+			return {
+				currentPage: 1, // 当前页
+				pageSize: 0, // 一页中对象数量
+				nextPage: 1, // 下一页
+				prePage: 1, // 上一页
+				currentIndex: 0, // 当前对象下标
+				currentObj: new Object(), // 当前对象
+				allSize: 1, // 总数量
+				allData: new Array(), // 总数据
+				allPage: Math.ceil(this.allSize / this.pageSize), // 总页数
+				resultData: new Array(), // 当前显示一组数据
+				isFresh: false,
+				getCurrentPage: function() {
+					return this.currentPage;
+				},
+				setCurrentPage: function(currentPage) {
+					this.currentPage = currentPage;
+					this.isFresh = true;
+					this.calResultData();
+				},
+				getAllPage: function() {
+					return this.allPage;
+				},
+				getPageSize: function() {
+					return this.pageSize;
+				},
+				setPageSize: function(pageSize) {
+					this.pageSize = pageSize;
+					this.isFresh = true;
+					this.calResultData();
+				},
+				getAllSize: function() {
+					this.allSize = this.allData.length;
+					return this.allSize;
+				},
+				calNextPage: function() { // 计算下一页
+					this.nextPage = this.getCurrentPage() < this.getAllPage() ? this.getCurrentPage() + 1 : this.getCurrentPage();
+					return this.nextPage;
+				},
+				getNextPage: function() {
+					return this.calNextPage();
+				},
+				calPrePage: function() { // 计算上一页
+					this.prePage = 1 < this.getCurrentPage() ? this.getCurrentPage() - 1 : 1;
+					return this.prePage;
+				},
+				getPrePage: function() {
+					return this.calPrePage();
+				},
+				calResultData: function() { // 计算当前页内容
+					if(this.isFresh) {
+						var startIndex = this.getPageSize() * (this.getCurrentPage() - 1);
+						var endIndex = this.getPageSize() * this.getCurrentPage() - 1;
+						endIndex = endIndex >= this.getAllSize() ? this.getAllSize() - 1 : endIndex;
+						this.resultData = [];
+						for(var i = startIndex; i <= endIndex; i++) {
+							this.resultData.push(this.allData[i]);
+						}
+						this.currentObj = this.resultData[this.currentIndex];
+						this.allPage = Math.ceil(this.getAllSize() / this.getPageSize());
+						this.calNextPage();
+						this.calPrePage();
+						this.isFresh = false;
+					}
+					return this.resultData;
+				},
+				getResultData: function() {
+					return this.calResultData();
+				},
+				setCurrentIndex: function(index) {
+					this.currentIndex = index;
+				},
+				getCurrentIndex: function() {
+					return this.currentIndex;
+				},
+				addCurrentIndex: function(num) {
+					num = num || 1;
+					this.currentIndex += num;
+				},
+				getCurrentObj: function(index) {
+					if(index) return this.resultData[index];
+					return this.currentObj;
+				},
+				init: function(allData, pageSize, currentPage) {
+					if(allData) this.allData = allData;
+					if(pageSize) this.pageSize = pageSize;
+					if(currentPage) this.currentPage = currentPage;
+					this.isFresh = true;
+					//this.currentIndex = 0;
+					this.calResultData();
+				}
+			}
+		}
+	}
+
+	//==========================================================
+</script>
+
+</html>

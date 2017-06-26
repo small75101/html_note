@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script>
+			var names= ["崔维斯·费米尔","托比·凯贝尔","本·福斯特", "本·施耐泽", "多米尼克·库珀", "吴彦祖", "宝拉·巴顿"];
+			var n1 = "";
+			var n2="";
+			var names2=[];
+			for(var i in names){
+				n2+=names[i]+",";
+				console.log(n2+" :"+n2.length);
+				if(n2.length>40){
+					names2.push(n1);  
+					n2="";
+					n2+=names[i]+",";
+					n1 = n2;
+				}else{
+					n1 = n2;
+				}
+			}
+			names2.push(n1);
+			console.log(names2);
+		</script>
+	</body>
+</html>
