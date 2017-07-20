@@ -44,7 +44,15 @@
 				throw new Error(e);
 			}
 		}
-		a();
+
+		function bb() {
+			try {
+				a();
+			} catch(e) {
+				console.log(e);
+			}
+		}
+		bb();
 	</script>
 </body>
 

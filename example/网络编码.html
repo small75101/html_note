@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<div id="aa"></div>
+	</body>
+	<script>
+		(function a(){
+			var addr = "http://127.0.0.1:8083/note/example/a.html?a=b&c=d";
+			console.log(addr);
+			console.log(encodeURI(addr));
+			console.log(escape(addr));
+			
+			document.getElementById("aa").innerHTML = addr;
+			
+			console.log(document.getElementById("aa").innerHTML);
+		})();
+	</script>
+</html>

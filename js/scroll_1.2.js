@@ -77,8 +77,8 @@ function scrollStop(obj, className, real) {
 		obj.classList.remove(className);
 		obj.scrollLeft = 0;
 		obj.style.whiteSpace = "normal"; //超出部分能换行
-		if(obj.temp) obj.innerHTML = obj.temp;
 		//obj.style.textOverflow = "ellipsis"; //超出部分用....符号替换
+		if(obj.temp&&(obj.temp.indexOf(obj.innerHTML)!=-1)) obj.innerHTML = obj.temp;
 	}
 	if(!document.myscroll) document.myscroll = new Array();
 	if(document.myscroll[className]) document.myscroll[className].stop();
