@@ -18,11 +18,11 @@
 		<div>This example shows how to use lazy loading in TreeGrid.</div>
 	</div>
 	
-	<table id="test" title="Lazy Loading" class="easyui-treegrid" style="width:700px;height:300px"
+	<table id="test" title="Lazy Loading" class="easyui-treegrid" style="width:1000px;height:300px"
 			>
 		<thead>
 			<tr>
-				<th field="description" width="100">description</th>
+				<th field="description" width="200">description</th>
 				<th field="operatorCode" width="100">operatorCode</th>
 				<th field="stbIP" width="100">stbIP</th>
 				<th field="starturl" width="100">starturl</th>
@@ -41,12 +41,19 @@
 		(function init(){
 			$('#test').treegrid({
 				panelWidth:500,
-				url: 'tree_treegrid.json',
 				rownumbers: true,
 				idField:'id',
 				treeField:'description',
-				fitColumns:true,
-				loadFilter: myLoadFilter
+				fitColumns:true
+			});
+			$.ajax({
+				type:"get",
+				url:"tree_treegrid.json",
+				async:true,
+				success:function(data){
+					$("#test").treegrid('loadData',data);  
+					console.log(data);
+				}
 			});
 		})();
 		function myLoadFilter(data,parentId){

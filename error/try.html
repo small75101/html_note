@@ -4,9 +4,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title></title>
+	<script src="../js/constant.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body>
+	<div id="error"></div>
+
 	<script>
 		/** 
 		 * @param {String} errorMessage  错误信息 
@@ -18,16 +21,14 @@
 		window.onerror = function(errorMessage, scriptURI, lineNumber, columnNumber, errorObj) {
 			var s = [];
 			s.push("错误信息：" + errorMessage);
-			s.push("出错文件：" + scriptURI);
-			s.push("出错行号：" + lineNumber);
-			s.push("出错列号：" + columnNumber);
-			s.push("错误详情：" + errorObj);
-			console.log("错误信息：", errorMessage);
-			console.log("出错文件：", scriptURI);
-			console.log("出错行号：", lineNumber);
-			console.log("出错列号：", columnNumber);
-			console.log("错误详情：", errorObj);
+			s.push("<br/>出错文件：" + scriptURI);
+			s.push("<br/>出错行号：" + lineNumber);
+			s.push("<br/>出错列号：" + columnNumber);
+			//s.push("<br/>错误详情：" + errorObj);
+			console.log(s);
+			showDialog(s, "", "error");
 		}
+
 		var b = {
 			a: 1,
 			b: 2,
@@ -35,22 +36,14 @@
 		};
 
 		function a() {
-			try {
-				const b = 3; // 包含在 if 中的块作用域常量
-				a = 3; // 正常 !
-				b = 4; // 错误 !
-				console.log(b);
-			} catch(e) {
-				throw new Error(e);
-			}
+			const b = 3; // 包含在 if 中的块作用域常量
+			a = 3; // 正常 !
+			b = 4; // 错误 !
+			console.log(b);
 		}
 
 		function bb() {
-			try {
-				a();
-			} catch(e) {
-				console.log(e);
-			}
+			a();
 		}
 		bb();
 	</script>

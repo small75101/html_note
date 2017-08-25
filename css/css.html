@@ -1,119 +1,127 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title></title>
-		<script>
-			var css1 = "font-size:60px; color:rgb(196,14,196); background-color:rgb(196,14,196);  font-family: Times, TimesNR, 'New Century Schoolbook', Georgia,'New York', serif; ";
-			/**
-			 * 
-			 * @param {Object} css
-			 * 			css = "font-size:60px; color:rgb(196,14,196);",
-			 * @param {Object} key
-			 * 			key = "font-size"
-			 * @return {Object} value
-			 * 			value = 60px
-			 */
-			function getCssBy(css,key){
-				var reg = /([^\s]+)\s?:\s?([^\{\}\;]+);/g;
-				var value = "";
-				while( (arr = reg.exec(css)) != null ) {
-					if(key == arr[1]){
-						value =  arr[2];
-						break;
-					}
+
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script>
+		var css1 =
+			"font-size:60px; color:rgb(196,14,196); background-color:rgb(196,14,196);  font-family: Times, TimesNR, 'New Century Schoolbook', Georgia,'New York', serif; ";
+		/**
+		 * 
+		 * @param {Object} css
+		 * 			css = "font-size:60px; color:rgb(196,14,196);",
+		 * @param {Object} key
+		 * 			key = "font-size"
+		 * @return {Object} value
+		 * 			value = 60px
+		 */
+		function getCssBy(css, key) {
+			var reg = /([^\s]+)\s?:\s?([^\{\}\;]+);/g;
+			var value = "";
+			while((arr = reg.exec(css)) != null) {
+				if(key == arr[1]) {
+					value = arr[2];
+					break;
 				}
-				return value;
 			}
-			console.log(getCssBy(css1,"font-family"));
-			/**
-			 * 
-			 * @param {Object} css
-			 * 			css = "font-size:60px; color:rgb(196,14,196);background-color:rgb(196,14,196);",
-			 * @param {Object} key
-			 * 			key = "font-size"
-			 * @return {Object} value
-			 * 			css
-			 */
-			function removeCssBy(css,key){
-				var reg = /([^\s]+)\s?:\s?([^\{\}\;]+);/g;
-				var arr = [],temp = "";
-				var isArray = key instanceof Array;
-				if(isArray){
-					while( (arr = reg.exec(css)) != null ) {
-						var i = 0;
-						for(x in key){
-							if(key[x] == arr[1]){
-								i = 1;
-								break;
-							}
-						}
-						if(i == 0){
-							temp +=arr[0]+" ";
-						}
-					}
-				}else{
-					while( (arr = reg.exec(css)) != null ) {
-						if(key != arr[1]){
-							temp +=arr[0]+" ";
+			return value;
+		}
+		console.log(getCssBy(css1, "font-family"));
+		/**
+		 * 
+		 * @param {Object} css
+		 * 			css = "font-size:60px; color:rgb(196,14,196);background-color:rgb(196,14,196);",
+		 * @param {Object} key
+		 * 			key = "font-size"
+		 * @return {Object} value
+		 * 			css
+		 */
+		function removeCssBy(css, key) {
+			var reg = /([^\s]+)\s?:\s?([^\{\}\;]+);/g;
+			var arr = [],
+				temp = "";
+			var isArray = key instanceof Array;
+			if(isArray) {
+				while((arr = reg.exec(css)) != null) {
+					var i = 0;
+					for(x in key) {
+						if(key[x] == arr[1]) {
+							i = 1;
+							break;
 						}
 					}
+					if(i == 0) {
+						temp += arr[0] + " ";
+					}
 				}
-				return temp;
-			}
-			console.log(removeCssBy(css1,"background-color"));
-			console.log(removeCssBy(css1,["font-size","background-color"]));
-			
-			/**
-			 * 
-			 * @param {Object} css 要空格
-			 * 			css = "font-size:60px; color:rgb(196,14,196);",
-			 * @param {Object} key
-			 * 			key = "font-family"
-			 * @return {Object} value
-			 * 			value = 宋体
-			 */
-			function addCssBy(css,key,value){
-				if(!css){
-					css = "";
+			} else {
+				while((arr = reg.exec(css)) != null) {
+					if(key != arr[1]) {
+						temp += arr[0] + " ";
+					}
 				}
-				if(css.toLowerCase().indexOf(key)==-1){
-					css += " "+key + ":" + value + "; ";
-				}else{
-					css = removeCssBy(css,key) + key + ":" + value + "; ";
-				}
-				return css;
 			}
-			console.log(addCssBy(css1,"font-family","'宋体'"));
-			console.log(addCssBy(css1,"font-family","'宋体1'"));
-		</script>
-		<script>
-			var 
-				css = 'td{ font-size: 17px; } .yessim{ font-size:60px; color:rgb(196,14,196);}',
-				reg = /([^\s]+)\s?:\s?([^\{\}\;]+);/g,
-				arr = [];
-			var _i  = 0;
-			while( (arr = reg.exec(css)) != null ) {
-				console.log(arr[0] + '[%c' + arr[1] + ':%c' + arr[2] + '%c]', 'color: red;', 'color: green;', 'color: blank;');
-				_i ++;
+			return temp;
+		}
+		console.log(removeCssBy(css1, "background-color"));
+		console.log(removeCssBy(css1, ["font-size", "background-color"]));
+
+		/**
+		 * 
+		 * @param {Object} css 要空格
+		 * 			css = "font-size:60px; color:rgb(196,14,196);",
+		 * @param {Object} key
+		 * 			key = "font-family"
+		 * @return {Object} value
+		 * 			value = 宋体
+		 */
+		function addCssBy(css, key, value) {
+			if(!css) {
+				css = "";
 			}
-			
-			console.log(_i);
-		</script>
-	</head>
-	<body>
-		<div id="a1" style="width: 100px;">aaa</div>
-		<script>
+			if(css.toLowerCase().indexOf(key) == -1) {
+				css += " " + key + ":" + value + "; ";
+			} else {
+				css = removeCssBy(css, key) + key + ":" + value + "; ";
+			}
+			return css;
+		}
+		console.log(addCssBy(css1, "font-family", "'宋体'"));
+		console.log(addCssBy(css1, "font-family", "'宋体1'"));
+	</script>
+	<script>
+		var
+			css = 'td{ font-size: 17px; } .yessim{ font-size:60px; color:rgb(196,14,196);}',
+			reg = /([^\s]+)\s?:\s?([^\{\}\;]+);/g,
+			arr = [];
+		var _i = 0;
+		while((arr = reg.exec(css)) != null) {
+			console.log(arr[0] + '[%c' + arr[1] + ':%c' + arr[2] + '%c]', 'color: red;', 'color: green;', 'color: blank;');
+			_i++;
+		}
+
+		console.log(_i);
+	</script>
+</head>
+
+<body>
+	<div id="a1" style="width: 100px;">aaa</div>
+	<script>
 		console.log("=================================================");
-			var a1 = document.getElementById("a1");
-			var css001 = "font-size:60px; color:rgb(196,14,196); font-family: Times, TimesNR, 'New Century Schoolbook', Georgia,'New York', serif; ";			function setStyle2View(css,div){
-				var reg = /([^\s]+)\s?:\s?([^\{\}\;]+);/g;
-				var value = "";
-				while( (arr = reg.exec(css)) != null ) {
-					div.style[arr[1]] = arr[2];
-				}
+		var a1 = document.getElementById("a1");
+		var css001 =
+			"font-size:60px; color:rgb(196,14,196); font-family: Times, TimesNR, 'New Century Schoolbook', Georgia,'New York', serif; ";
+
+		function setStyle2View(css, div) {
+			var reg = /([^\s]+)\s?:\s?([^\{\}\;]+);/g;
+			var value = "";
+			while((arr = reg.exec(css)) != null) {
+				div.style[arr[1]] = arr[2];
 			}
-			setStyle2View(css001, a1);
-		</script>
-	</body>
+		}
+		setStyle2View(css001, a1);
+	</script>
+</body>
+
 </html>
