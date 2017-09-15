@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>a</title>
+	<style>
+		#showDialog {
+			background-color: #ffdddd;
+			border: 1px solid #f44336;
+			border-radius: 10px;
+			padding: 10px;
+			width: 500px;
+		}
+		#showDialog h3 {
+			text-align: center;
+			margin: 0;
+			padding: 0;
+		}
+		#showDialog div:last-child {
+			word-wrap: break-word;
+		}
+	</style>
+	<script type="text/javascript" src="auto-dialog.js"></script>
+</head>
+
+<body>
+	<!--<div id="showDialog">
+		<div>
+			<h3>
+				<span>错误：</span>
+				<span id="sd_title"></span>
+			</h3>
+		</div>
+		<div>
+			<span id="sd_content">
+				错误信息：Uncaught TypeError: Assignment to constant variable.,
+				<br/>出错文件：http://127.0.0.1:8083/note/css/%E5%8A%A8%E6%80%81%E6%8F%90%E7%A4%BA%E6%A1%86.html,
+				<br/>出错行号：24,
+				<br/>出错列号：5
+			</span>
+		</div>
+	</div>-->
+	<button onclick="openDialog();">提示框</button>
+</body>
+<script>
+	function openDialog() {
+		const b = 3; // 包含在 if 中的块作用域常量
+		b = 4; // 错误 !
+		showMessage("无毛病", "消息");
+	}
+	/** 
+	 * @param {String} errorMessage  错误信息 
+	 * @param {String} scriptURI   出错的文件 
+	 * @param {Long}  lineNumber   出错代码的行号 
+	 * @param {Long}  columnNumber  出错代码的列号 
+	 * @param {Object} errorObj    错误的详细信息，Anything 
+	 */
+	window.onerror = function(errorMessage, scriptURI, lineNumber, columnNumber, errorObj) {
+		var s = [];
+		s.push("错误信息：" + errorMessage);
+		s.push("<br/>出错文件：" + scriptURI);
+		s.push("<br/>出错行号：" + lineNumber);
+		s.push("<br/>出错列号：" + columnNumber);
+		//s.push("<br/>错误详情：" + errorObj);
+		showDialog(s, "", "", 1);
+	}
+</script>
+
+</html>
