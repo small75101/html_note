@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="data/angular.min.js"></script>
+		<style>
+			table,
+			th,
+			td {
+				border: 1px solid grey;
+				border-collapse: collapse;
+				padding: 5px;
+			}
+			
+			table tr:nth-child(odd) {
+				background-color: #f1f1f1;
+			}
+			
+			table tr:nth-child(even) {
+				background-color: #ffffff;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<div ng-include="'test01.html'"></div>
+			
+			<p>名字 : <input type="text" ng-model="name"></p>
+			<h1>Hello {{name}}</h1>
+			<table>
+				<tr ng-repeat="x in datas| orderBy:'phone'">
+					<td>{{x.name}}</td>
+					<td>{{x.age}}</td>
+					<td>{{x.phone}}</td>
+					<td><span ng-repeat="y in x.email">{{y | uppercase}}</span></td>
+				</tr>
+			</table>
+			<select ng-model="selectedName" ng-options="x.name for x in datas">
+			</select>
+			<h1>你选择的是: {{selectedName.name+" "+selectedName.age+" "+selectedName.phone	}}</h1>
+
+			<select ng-model="selectedSite">
+				<option ng-repeat="x in datas" value="{{x.phone}}">{{x.name}}</option>
+			</select>
+
+			<h1>你选择的是: {{selectedSite}}</h1>
+			
+		</div>
+		<script>
+			var app = angular.module("myApp", []);
+			app.controller('myCtrl', function($scope, $http) {
+				$http.get("data/first_data.json").then(function(response) {
+					console.log(response);
+					console.log(response.data)
+					$scope.datas = response.data;
+					$scope.name = "world"
+				});
+			});
+			app.controller('myCtrl1', function($scope) {
+				$scope.firstName = "John";
+				$scope.lastName = "Doe";
+				$scope.allName = $scope.firstName + " " + $scope.lastName;
+				$scope.names=[{name:'Jani',country:'Norway'},{name:'Hege',country:'Sweden'},{name:'Kai',country:'Denmark'}];
+			});
+			app.directive("runoobDirective", function() {
+			    return {
+			        template : "<h1>自定义指令!</h1>"
+			    };
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,386 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>我的收藏</title>
+	<style>
+		* {
+			font-family: Times, TimesNR, 'New Century Schoolbook', Georgia, 'New York', serif;
+			font: normal 16px/20px arial, sans-serif;
+		}
+		.container {
+			margin: auto;
+			background-color: #b0e0e6;
+		}
+		.wrap {
+			width: 80%;
+			height: 100%;
+			margin: 0 auto;
+			text-align: center;
+		}
+		.main {
+			width: 90%;
+			min-width: 1000px;
+		}
+		.main-left, .main-right, .content {
+			display: inline-block;
+			vertical-align: top;
+			text-align: left;
+		}
+		.main-left {
+			min-width: 95px;
+			padding-left: 20px;
+			background-color: #efefef;
+		}
+		.main-left ul.nav {
+			list-style-type: none;
+			padding: 0;
+		}
+		.main-left ul.nav li {
+			margin-top: 5px;
+			margin-bottom: 5px;
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+		.main-left ul.nav li:hover {
+			color: #96B97D;
+			cursor: pointer;
+		}
+		.main-left ul.nav li.current {
+			color: #96B97D;
+		}
+		.main-left ul.nav li.current:before {
+			content: " 》";
+		}
+		.content {
+			width: 800px;
+			margin: 0 auto;
+			background-color: #efefef;
+		}
+		.content .title {
+			display: block;
+			text-align: center;
+			margin: 0 auto;
+		}
+		.content ul.nav {
+			list-style-type: none;
+			padding: 0;
+		}
+		.content ul.nav li {
+			display: inline-block;
+			padding: 5px 20px;
+			text-decoration: none;
+		}
+		.content ul.nav li.current {
+			color: darkgreen;
+			text-decoration: underline;
+		}
+		.content ul.nav li:hover {
+			color: darkgreen;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body class="container">
+	<div class="wrap">
+		<div class="header">
+			<div class="nav"></div>
+		</div>
+		<div class="main">
+			<div class="main-left">
+				<ul id="menunav" class="nav">
+					<li data-area="myhelp">我的帮助</li>
+					<li data-area="mylearn">我的学习</li>
+					<li data-area="myjava">我的JAVA</li>
+					<li data-area="myfavorite">我的收藏</li>
+				</ul>
+			</div>
+			<div id="content" class="content">
+				<!--我的收藏-->
+				<ul id="myfavorite" class="nav" style="display: none;">
+					<li data-url="http://www.baidu.com/">百度</li>
+					<li data-url="http://www.cssmoban.com/">模板之家</li>
+					<li data-url="http://www.mobanwang.com/">模板王</li>
+					<li data-url="http://xiuxiu.web.meitu.com/">美图秀秀网页版</li>
+					<li data-url="http://moban.knowsky.com">模板大宝库</li>
+					<li data-url="http://www.mb5u.com/">模板无忧</li>
+					<li data-url="http://blog.csdn.net/dc_726/article/details/9531281">IDEA快捷键</li>
+					<li data-url="https://www.processon.com/i/596edd35e4b08e72e48d1c46">流程图制作网站</li>
+					<li data-url="http://www.yaojingweiba.com/manhua/">妖精的尾巴</li>
+				</ul>
+				<!--我的学习-->
+				<ul id="mylearn" class="nav" style="display: none;">
+					<li data-url="http://www.runoob.com/">菜鸟教程</li>
+					<li data-url="http://www.yiibai.com/">易百教程</li>
+					<li data-url="http://www.xuebuyuan.com">学步园</li>
+					<li data-url="http://www.51zxw.net/">51自学网</li>
+					<li data-url="http://www.zslin.com/?cateId=3">知识林</li>
+					<li data-url="http://www.riaway.com/theme.php">IDEA主题</li>
+				</ul>
+				<!--我的JAVA-->
+				<ul id="myjava" class="nav" style="display: none;">
+					<li data-url="http://www.java1234.com/">Java知识分享网</li>
+					<li data-url="http://www.java1234.com/javapachongxuexiluxiantu.html">Java学习路线图</li>
+					<li data-url="http://www.runoob.com/coder-learn-path">各类程序员学习路线图</li>
+					<li data-url="https://github.com/lenve/JavaEETest">SpringBoot案例</li>
+					<li data-url="http://blog.csdn.net/u012702547/article/details/54319508">SpringBoot案例博客</li>
+					<li data-url="http://www.thymeleaf.org/doc/articles/springsecurity.html">Thymeleaf-springsecurity</li>
+					<li data-url="http://blog.csdn.net/code__code/article/details/53885510">Spring boot+Spring Security 4配置整合实例</li>
+					<li data-url="http://docs.spring.io/spring-data/jpa/docs/1.11.3.RELEASE/reference/html/#new-features.1-11-0">Spring Data 文档</li>
+				</ul>
+				<!--我的帮助-->
+				<ul id="myhelp" class="nav" style="display: none;">
+					<li data-url="https://github.com/">Github</li>
+					<li data-url="http://repo1.maven.org/maven2/">Maven仓库</li>
+					<li data-url="http://mvnrepository.com/">MvnRepository</li>
+					<li data-url="https://github.com/samsonw/OpenExplorer/downloads">Eclipse的Explorer插件</li>
+				</ul>
+			</div>
+			<div class="main-right"></div>
+		</div>
+		<div class="footer "></div>
+	</div>
+</body>
+
+<script>
+	var menu_last;
+	var menu_current; //菜单栏当前对象
+	var menu_index = 0; //菜单栏当前下标
+	var menus = []; //菜单栏
+	var page_type = 0; //0：菜单栏标识 1：一级菜单栏标识 2：一级菜单栏标识
+	var content_last;
+	var content_current; //内容当前对象
+	var content_index = -1; //内容当前下标
+	var contents = []; //内容
+	var contentarr = [];
+	(function() {
+		addOnClickToMenuNav();
+		addOnClickToContent();
+		setMenuToShow(menu_index);
+	}());
+
+	function addOnClickToMenuNav() {
+		var list = document.getElementById("menunav").getElementsByTagName("li");
+		menus = list;
+		for(var i = 0; i < list.length; i++) {
+			list[i].onclick = function() { //点击事件  ondblclick双击事件
+				for(var i = 0; i < list.length; i++) {
+					if(list[i] === this) {
+						menu_index = i;
+					}
+				}
+				setMenuToShow(menu_index)
+			}
+		}
+	}
+	//显示菜单 index 
+	function setMenuToShow(index) {
+		//===移除上一个对象
+		if(menu_last) {
+			menu_last.classList.remove("current");
+			var cur_id = menu_last.getAttribute('data-area');
+			var obj = document.getElementById(cur_id);
+			if(obj) obj.style.display = "none";
+		}
+		//===获取当前对象
+		menu_current = menus[index];
+		menu_last = menu_current;
+		if(menu_current) {
+			menu_current.classList.add("current");
+			var cur_id = menu_current.getAttribute('data-area');
+			var obj = document.getElementById(cur_id);
+			if(obj) {
+				obj.style.display = "block";
+				contents = obj.getElementsByTagName('li');
+				addPosToContent();
+			}
+		} else {
+			alert("不存在下标为" + index + "的对象");
+		}
+	}
+
+	function addOnClickToContent() {
+		//获取所有li的节点
+		var list = document.getElementById("content").getElementsByTagName("li");
+		//给每个li绑定事件
+		for(var i = 0; i < list.length; i++) {
+			list[i].onclick = function() { //点击事件  ondblclick双击事件
+				var url = this.getAttribute('data-url');
+				if(url) {
+					window.open(url);
+				} else {
+					alert("未提供地址！");
+				}
+			}
+		}
+	}
+	//显示内容 index
+	function setContentToShow(index) {
+		if(index >= 0 && index < contents.length) {
+			if(content_last) content_last.classList.remove("current");
+			//===获取当前对象
+			content_current = contents[index];
+			content_last = content_current;
+			content_index = index;
+			if(content_current) {
+				content_current.classList.add("current")
+			} else {
+				alert("不存在下标为" + index + "内容项");
+			}
+		} else if(index == -1) {
+			if(content_last) content_last.classList.remove("current");
+		}
+	}
+	document.onkeydown = function(event) {
+		var e = event || window.event || arguments.callee.caller.arguments[0];
+		if(e) {
+			console.log(e.keyCode);
+			if(e.keyCode == 33){//上一组
+				menu_index--;
+				if(menu_index < 0) {
+					menu_index = menus.length - 1;
+				}
+				setMenuToShow(menu_index);
+				content_index = -1;
+			}else if(e.keyCode == 34){//下一组
+				menu_index++;
+				if(menu_index == menus.length) {
+					menu_index = 0;
+				}
+				setMenuToShow(menu_index);
+				content_index = -1;
+			}else if(e.keyCode == 37) { // 左 
+				//console.log("左");
+				if(page_type == 1) {
+					content_index--;
+					if(content_index < 0) {
+						content_index = -1;
+						page_type = 0;
+					}
+					setContentToShow(content_index);
+				}
+			} else if(e.keyCode == 38) { // 上
+				if(page_type == 0) {
+					menu_index--;
+					if(menu_index < 0) {
+						menu_index = menus.length - 1;
+					}
+					setMenuToShow(menu_index);
+				} else if(page_type == 1) {
+					goToDirection("UP");
+				}
+				//console.log("上");
+			} else if(e.keyCode == 39) { // 右
+				//console.log("右");
+				if(page_type == 0) {
+					page_type = 1;
+				}
+				if(page_type == 1) {
+					content_index++;
+					if(content_index == contents.length) {
+						content_index = 0;
+					}
+					setContentToShow(content_index);
+				}
+			} else if(e.keyCode == 40) { // 下
+				if(page_type == 0) {
+					menu_index++;
+					if(menu_index == menus.length) {
+						menu_index = 0;
+					}
+					setMenuToShow(menu_index);
+				} else if(page_type == 1) {
+					goToDirection("DOWN");
+				}
+				//console.log("下");
+			} else if(e.keyCode == 13) { //确认
+				if(page_type == 1) {
+					content_current = contents[content_index];
+					if(content_current) {
+						content_current.onclick();
+					}
+				}
+
+			}
+		}
+	};
+	//获取对象相对坐标
+	function getRelativeLocation(obj) {
+		if(obj && obj.getBoundingClientRect()) {
+			return new Array(obj.getBoundingClientRect().left, obj.getBoundingClientRect().top);
+		}
+	}
+	//计算两点直线距离
+	function calPointsDistance(a, b) {
+		var dis = Math.sqrt((a[0] - b[0]) * (a[0] - b[0]) + (a[1] - b[1]) * (a[1] - b[1]));
+		return dis;
+	}
+
+	function goToDirection(type) {
+		var group = [];
+	//	console.log(content_current.line);
+		switch(type.toLowerCase()) {
+			case 'up':
+				group = contentarr[content_current.line-1];
+				break;
+			case 'down':
+				group = contentarr[content_current.line+1];
+				break;
+			default:
+				break;
+		}
+		var p2 = getRelativeLocation(content_current);
+		if(group) { //不存在就是最后一行或是第一行
+			var minDis = 0;
+			var minObj;
+			for(var i = 0; i < group.length; i++) {
+				var dis = calPointsDistance(p2, group[i].pos);
+				if(i==0){
+					minDis = dis;
+					minObj = group[i];
+				}else if(dis <= minDis) {
+					minDis = dis;
+					minObj = group[i];
+				}
+			}
+			if(minObj) setContentToShow(minObj.idx);
+		}
+	}
+	//将坐标添加至对象中
+	function addPosToContent() {
+		if(contents.length > 0) {
+			contentarr= [];
+			//二维数组
+			//一行  几个 每个坐标
+			//二行 几个  每个坐标
+			//list<list<Objcet>>
+			var group = [];
+			var linePos = [0, 0];
+			var line = 0;
+			var oldLine = line;
+			for(var i = 0; i < contents.length; i++) {
+				var p1 = getRelativeLocation(contents[i]);
+				if(Math.abs(linePos[1] - p1[1]) <= 20) {
+					group.push(contents[i]);
+					contents[i].line = line; //将行号添加至对象中
+					contents[i].pos = p1; //将坐标添加至对象中
+					contents[i].idx = i; //将对象位置添加至对象中
+				} else {
+					contentarr.push(group);
+					linePos = p1;
+					line++;
+					group = [];
+					group.push(contents[i]);
+					contents[i].line = line;
+					contents[i].pos = p1;
+					contents[i].idx = i;
+				}
+			}
+			contentarr.push(group);
+		}
+	}
+</script>
+
+</html>

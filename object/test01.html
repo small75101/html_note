@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<script>
+			function Person() {
+				var name = "Leo";
+				if(this.constructor != Person)
+					throw new Error("只能通过Person的getInstance方法调用此构造函数");
+				if(typeof this.getName != "function") {
+					Person.prototype.getName = function() {
+						return name;
+					}
+					Person.prototype.setName = function(n) {
+						name = n;
+					}
+				}
+				if(typeof Person._initialized == "undefined") {
+					Person.prototype.showColor = function() {
+						alert(this.color);
+					};
+
+					Person._initialized = true;
+				}
+			}
+			Person.getInstance = function() {
+					return new Person();
+				} //此时只能通过getInstance方法获取
+				//到Person的对象实例，至此，问题完美解决
+			var person = Person.getInstance();
+			console.log(person.getName());
+			person.setName("张三");
+			console.log(person.getName());
+		</script>
+	</body>
+
+</html>

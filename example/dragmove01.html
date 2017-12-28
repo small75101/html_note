@@ -1,0 +1,115 @@
+<html>
+<head>
+ 
+<meta charset="utf-8" />
+<style type="text/css">
+#typewords
+{
+     
+}
+ 
+#write
+{
+     
+}
+ 
+#container
+{
+    border:2px solid red;
+    width:800px;
+    height:500px;
+     
+}
+ 
+#draggable
+{
+    position:absolute;
+    z-index:5;
+    width:200px;
+    height:200px;
+    top:20px;
+    left:50px;
+    border: 3px solid blue; 
+}
+</style>
+ 
+<script src="../js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+ 
+<script type="text/javascript">
+ 
+//拖动
+function Drag()
+{
+        $("#draggable").mousemove(function(event){
+        //得到X坐标和Y坐标
+        var x=event.clientX;
+        var y=event.clientY;
+         
+        //得到可拖动框的高度和宽度
+        var widthX=$("#draggable").width();
+        var heightY=$("#draggable").height();
+ 
+        //alert("x:"+ x+"width:"+widthX);
+        //确定拖动的时候X,Y的值
+        $("#draggable").css("top",y-50+"px");
+        $("#draggable").css("left",x-50+"px");
+         
+ 
+    }); 
+}
+ 
+function MouseUp()
+{
+            $("#draggable").mouseup(function(){
+            if(window.captureEvents)
+            {
+ 
+                window.captureEvents(Event.MOUSEMOVE | Event.MOUSEUP);
+                var d = document;                
+                d.onmousemove = null;
+                d.onmouseup = null;
+                 
+            }
+            //解除mousemove的绑定
+            $("#draggable").unbind("mousemove");
+             
+        }); 
+     
+}
+ 
+//鼠标拖动DIV,鼠标按下去的事件
+//alert('1');
+$(document).ready(function(e) {
+     
+    //鼠标按下去的时候执行下面的代码
+     
+    $("#draggable").mousedown(function(){
+         
+        Drag();     
+        //鼠标点击的时候取消事件绑定
+        MouseUp();
+         
+        });
+});
+</script>
+ 
+</head>
+<body>
+ 
+<!--输入文字 -->
+<div><input id="typewords" type="text" />&nbsp;&nbsp;<input type="button" id="write" value="写心情" /></div>
+ 
+<br />
+<hr />
+<!-- container,里面包含了心情的内容-->
+<div id="container">
+    <!--可拖动的DIV -->
+    <div id="draggable">
+    测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据测试数据
+    </div>
+ 
+</div>
+ 
+ 
+</body>
+</html>

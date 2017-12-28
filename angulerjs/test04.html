@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myapp" ng-controller="myCtrl">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Title</title>
+		<style>
+			 *{margin:0;padding:0; list-style: none;font-size:12px;}
+			 .clearfix{overflow: hidden;display:block;clear:both}
+			 .clearfix:after{zoom:1}
+			 .relation{margin-top:7px;font:14px/38px "微软雅黑"; height: 38px; background: #f8f8f8; padding-left: 26px; color: #666;}
+			 .relation li{ margin-top: 5px;float:left;padding-left:50px;cursor:pointer;text-decoration: double}
+			 .relation li:hover{color:#f00};
+			 .tableMain li{float:left;padding:5px 10px;width:50px}
+			 .ullist1 li.num39{width: 39px; height: 36px;line-height: 36px; text-align: center; float: left; border-right: 1px solid #ddd;}
+			 .ullist1 li.num73{width: 73px; height: 36px;line-height: 36px; text-align: center; float: left; border-right: 1px solid #ddd;}
+			 .ullist1 li.num85{width: 85px; height: 36px; line-height: 36px; text-align: center; float: left; border-right: 1px solid #ddd;}
+			 .ullist1 li.num114{width:140px; height: 36px;line-height: 36px; text-align: center; float: left; border-right: 1px solid #ddd;}
+			 .ullist1 li.num122{width:170px; height: 36px;line-height: 36px; text-align: center; float: left; border-right: 1px solid #ddd;}
+			 .ullist1 li.num167{width:180px; height: 36px;line-height: 36px; text-align: center; float: left; border-right: 1px solid #ddd;}
+			 .ullist1 li.num185{width:185px; height: 36px;line-height: 36px; text-align: center; float: left; border-right: 1px solid #ddd;}
+			 .ullist1 li.num70{width:70px;height: 36px;line-height: 36px; text-align: center; float: left; border-right: 1px solid #ddd;}
+			 .ullist1 li.num103{width:183px; height: 36px;line-height: 36px; text-align: center; float: left; border-right: 1px solid #ddd;}
+			 .ullist1 li.num97{width:160px; height: 36px;line-height: 36px; text-align: center; float: left; border-right: 1px solid #ddd;}
+			 
+			 .ulConter1 li.num39{width: 39px;height: 42px; line-height: 42px; float: left; border-right: 1px solid #ddd;}
+			 .ulConter1 li.num73{width: 73px; height: 42px; line-height: 42px; float: left; border-right: 1px solid #ddd;}
+			 .ulConter1 li.num85{width: 85px; height: 42px; line-height: 42px; float: left; border-right: 1px solid #ddd;}
+			 .ulConter1 li.num114{width:140px; height: 42px; line-height: 42px; float: left; border-right: 1px solid #ddd;}
+			 .ulConter1 li.num122{width:170px; height: 42px; line-height: 42px; float: left; border-right: 1px solid #ddd;}
+			 .ulConter1 li.num167{width:180px; height: 42px; line-height: 42px; float: left; border-right: 1px solid #ddd;}
+			 .ulConter1 li.num185{width:185px; height: 42px; line-height: 42px; float: left; border-right: 1px solid #ddd;}
+			 .ulConter1 li.num70{width:70px; height: 42px; line-height: 42px; float: left; border-right: 1px solid #ddd;}
+			 .ulConter1 li.num103{width:183px; height: 42px; line-height: 42px; float: left; border-right: 1px solid #ddd;}
+			 .ulConter1 li.num97{width:160px; height: 42px; line-height: 42px; float: left; border-right: 1px solid #ddd;}
+			 
+			 .ulConter1 li.num39 input{ width:19px; height: 19px; margin:11px; border: 1px solid #ddd; }
+			 .ulConter1 li.num73 input{ width:68px; border: 1px solid #ddd; margin: 2px;line-height: 32px; height: 32px;}
+			 .ulConter1 li.num85 input{ width:80px; border: 1px solid #ddd; margin: 2px;line-height: 32px; height: 32px;}
+			 .ulConter1 li.num114 input{ width:135px; border: 1px solid #ddd; margin: 2px;line-height: 32px; height: 32px;}
+			 .ulConter1 li.num122 input{ width:165px; border: 1px solid #ddd; margin: 2px;line-height: 32px; height: 32px;}
+			 .ulConter1 li.num167 input{ width:175px; border: 1px solid #ddd; margin: 2px;line-height: 32px; height: 32px;}
+			 .ulConter1 li.num185 input{ width:180px; border: 1px solid #ddd; margin: 2px;line-height: 32px; height: 32px;}
+			 .ulConter1 li.num70 input{ width:65px; border: 1px solid #ddd; margin: 2px;line-height: 32px; height: 32px;}
+			 .ulConter1 li.num103 input{ width:178px; border: 1px solid #ddd; margin: 2px;line-height: 32px; height: 32px;}
+			 .ulConter1 li.num97 input{ width:150px; border: 1px solid #ddd; margin: 2px;line-height: 32px; height: 32px;}
+		</style>
+		<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+
+	<body>
+		<ul class="relation clearfix">
+			<li class="news" ng-click="others.addContact()">新增</li>
+			<li class="dele" ng-click="others.deleContact()">删除</li>
+			<li class="upico" ng-click="others.moveUp()">上移</li>
+			<li class="downico" ng-click="others.moveDown()">下移</li>
+		</ul>
+		<div class="class=" tableMain "">
+			<ol class="clearfix ullist1">
+				<li class="num39"></li>
+				<li class="num73">联系人</li>
+				<li class="num85">商务电话</li>
+				<li class="num114">移动电话</li>
+				<li class="num122">QQ</li>
+				<li class="num122">SKYPE</li>
+				<li class="num167">电子邮件</li>
+			</ol>
+			<ul class="ulConter1 clearfix" ng-repeat="item in items">
+				<li class="num39">
+					<input type="radio" ng-click="others.selected(item)" name="select">
+				</li>
+				<li class="num73">
+					<input type="text" ng-model="item.otherContact">
+				</li>
+				<li class="num85">
+					<input type="text" ng-model="item.otherBusinessTel">
+				</li>
+				<li class="num114">
+					<input type="text" ng-model="item.otherMobPhone">
+				</li>
+				<li class="num122">
+					<input type="text" ng-model="item.otherQQ">
+				</li>
+				<li class="num122">
+					<input type="text" ng-model="item.otherSKYPE">
+				</li>
+				<li class="num167">
+					<input type="text" ng-model="item.otherEmail">
+				</li>
+			</ul>
+		</div>
+
+		<script>
+			angular.module('myapp', []).controller('myCtrl', function($scope) {
+				$scope.items = [];
+				$scope.others = {
+					selectedItem: {},
+					selected: function(item) {
+						this.selectedItem = item;
+					},
+					//增加
+					addContact: function() {
+						$scope.items.push({
+							otherContact: '',
+							otherBusinessTel: '',
+							otherMobPhone: '',
+							otherQQ: '',
+							otherSKYPE: '',
+							otherEmail: '',
+							otherDeliveryAddress: '',
+							otherSex: '',
+							otherDepartment: ''
+						});
+					},
+					//刪除；
+					deleContact: function() {
+						var index = $scope.items.indexOf(this.selectedItem);
+						$scope.items.splice(index, 1);
+					},
+					//上移；
+					moveUp: function() {
+						var index = $scope.items.indexOf(this.selectedItem);
+						var tmp = angular.copy($scope.items[index - 1]);
+						if(index == 0) {
+							alert('已經是第一個了，不能再向上移動了！');
+							return;
+						}
+						$scope.items[index - 1] = $scope.items[index];
+						$scope.items[index] = tmp;
+
+					},
+					//下移；
+					moveDown: function() {
+						var index = $scope.items.indexOf(this.selectedItem);
+
+						if(index == $scope.items.length - 1) {
+							alert('已經是最後一個了，不能再向下移動了！');
+							return;
+						}
+						var tmp = angular.copy($scope.items[index + 1]);
+						$scope.items[index + 1] = $scope.items[index];
+						$scope.items[index] = tmp;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

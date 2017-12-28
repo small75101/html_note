@@ -1,0 +1,8 @@
+@import url('css02.css');
+.red {
+	background-color: red;
+}
+.min {
+	width: 80px;
+	height: 80px;
+}

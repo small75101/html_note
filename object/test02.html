@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			.showCss{
+				display: block;
+			}
+			.showCss1{
+				width: 100px;
+			}
+			.showCss2{
+				background-color: blue;
+			}
+		</style>
+	</head>
+
+	<body>
+		<span id="showCss" class="showCss1">a</span>
+		<a href="javascript:void(0)" onclick="showCss()">showCss</a>
+		<script>
+			function showCss() {
+				var obj = document.getElementById("showCss");
+				obj.classList.add("showCss");
+				console.log(obj.classList);
+				obj.classList.remove("showCss1");
+				obj.classList.add("showCss2");
+				console.log(obj.classList);
+				
+			}
+			(function(val) {
+				console.log(val);
+				console.log(typeof arguments[0]);
+				console.log(arguments[0] || '')
+				console.log(formatTime("20161128 09:12:12.0"));
+				show();
+			})(new Date());
+
+			(function() {
+				console.log("show1");
+			})();
+
+			function show() {
+				console.log("show");
+				var person = new Person("張三");
+				person.showName();
+				person.showColor();
+			}
+
+			function Person(name) {
+				this.name = name;
+				this.color = "blue";
+				this.showName = function() {
+					console.log(this.name);
+				}
+				if(typeof Person._initialized == "undefined") {
+					Person.prototype.showColor = function() {
+						//alert(this.color);
+					};
+
+					Person._initialized = true;
+				}
+			}
+
+			function formatTime(date) {
+				if((typeof date) == 'object') {
+					var hour = date.getHours();
+					var minute = date.getMinutes();
+					minute = minute < 10 ? ('0' + minute) : minute;
+					var s = date.getSeconds();
+					s = s < 10 ? ('0' + s) : s;
+					return hour + ':' + minute + ":" + s;
+				} else if((typeof date) == 'string') {
+					return date.replace(/[\-]*[\s]*/g, "").substring(8, 16);
+				}
+			}
+		</script>
+	</body>
+
+</html>

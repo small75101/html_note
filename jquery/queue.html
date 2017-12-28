@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<style>
+			div {
+				margin: 3px;
+				width: 40px;
+				height: 40px;
+				position: absolute;
+				left: 0px;
+				top: 30px;
+				background: green;
+				display: none;
+			}
+			
+			div.newcolor {
+				background: blue;
+			}
+			
+			span {
+				color: red;
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<span></span>
+		<div id="div1"></div>
+		<button id="show">Show Length of Queue</button>
+		
+		<hr style="margin-top: 50px;" />
+		<button id="start">Start</button>
+		<button id="stop">Stop</button>
+		<div id="div2"></div>
+		<hr style="margin-top: 50px;" />
+		<button id="start1">Start</button>
+		<div id="div3"></div>
+	</body>
+	<script>
+		$("#show").click(function() {
+			var n = $("#div1").queue("fx");
+			$("span").text("Queue length is: " + n.length);
+		});
+
+		function runIt() {
+			$("#div1").show("slow");
+			$("#div1").animate({
+				left: '+=200'
+			}, 2000);
+			$("#div1").slideToggle(1000);
+			$("#div1").slideToggle("fast");
+			$("#div1").animate({
+				left: '-=200'
+			}, 1500);
+			$("#div1").hide("slow");
+			$("#div1").show(1200);
+			$("#div1").slideUp("normal", runIt);
+		}
+		runIt();
+
+		$("#start").click(function() {
+			$("#div2").show("slow");
+			$("#div2").animate({
+				left: '+=200'
+			}, 5000);
+			$("#div2").queue(function() {
+				$(this).addClass("newcolor");
+				$(this).dequeue();
+			});
+			$("#div2").animate({
+				left: '-=200'
+			}, 1500);
+			$("#div2").queue(function() {
+				$(this).removeClass("newcolor");
+				$(this).dequeue();
+			});
+			$("div").slideUp();
+		});
+		$("#stop").click(function() {
+			$("#div2").queue("fx", []);
+			$("#div2").stop();
+		});
+
+		$("#start1").click(function() {
+			$("#div3").show("slow");
+			$("#div3").animate({
+				left: '+=200'
+			}, 2000);
+			$("#div3").queue(function() {
+				$(this).addClass("newcolor");
+				$(this).dequeue();
+			});
+			$("#div3").animate({
+				left: '-=200'
+			}, 500);
+			$("#div3").queue(function() {
+				$(this).removeClass("newcolor");
+				$(this).dequeue();
+			});
+			$("#div3").slideUp();
+		});
+	</script>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<title></title>
+</head>
+
+<body>
+	<input type="file" name="file01" id="file01" onchange="a()" />
+	<br />
+	<img alt="无图片" id="show01" />
+	<br />
+	<input type="button" value="变换" onclick="b()" />
+	<br />
+	<img alt="无图片" id="show02" />
+	<br />
+	<div id="forAppend" class="demo" style="width: 100px;height: 100px;"></div>
+</body>
+<script type="text/javascript">
+	var fd = new FormData();
+	var picFiles = [];
+
+	function a() {
+		var picFile = new PicFile(picFiles.length + 1, "file01");
+		readAsDataURL(picFile.pFile, function(dataurl) {
+			picFile.pDataUrl = dataurl;
+			picFile.pBlob= dataURLtoBlob(dataurl);
+			picFiles.push(picFile);
+			console.log(picFiles);
+			document.getElementById("show01").src = dataurl;
+		});
+	}
+
+	function b() {
+		document.getElementById("show02").src = picFiles.pop().pFileUrl;
+	}
+	/** 
+	 * 从 file 域获取 本地图片 url 
+	 */
+	function getFileUrl(sourceId) {
+		var url;
+		if(navigator.userAgent.indexOf("MSIE") >= 1) { // IE 
+			url = document.getElementById(sourceId).value;
+		} else if(navigator.userAgent.indexOf("Firefox") > 0) { // Firefox 
+			url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
+		} else if(navigator.userAgent.indexOf("Chrome") > 0) { // Chrome 
+			url = window.URL.createObjectURL(document.getElementById(sourceId).files.item(0));
+		}
+		return url;
+	}
+	var eleAppend = document.getElementById("forAppend");
+	window.URL = window.URL || window.webkitURL;
+	if(typeof history.pushState == "function") {
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "../img/focus_03.png", true);
+		xhr.responseType = "blob";
+		xhr.onload = function() {
+			if(this.status == 200) {
+				var blob = this.response;
+				var img = document.createElement("img");
+				img.onload = function(e) {
+					window.URL.revokeObjectURL(img.src); // 清除释放
+				};
+				img.src = window.URL.createObjectURL(blob);
+				eleAppend.appendChild(img);
+			}
+		}
+		xhr.send();
+	} else {
+		eleAppend.innerHTML = '<p style="color:#cd0000;">浏览器不给力，还是早点回去给孩子喂奶吧~</p>';
+	}
+
+	/**
+	 * 文件图片对象用于临时存放图片对象
+	 * @param {Object} pkey
+	 * @param {Object} id <input type="file" id="file"/>
+	 */
+	function PicFile(pkey, id) {
+		this.pkey = pkey;
+		this.pFile = document.getElementById(id).files[0];
+		this.pDataUrl = null;
+	}
+
+	/**
+	 * File对象转换为dataURL、Blob对象转换为dataURL	 
+	 * @param {Object} blob
+	 * @param {Object} callback
+	 */
+	function readAsDataURL(blob, callback) {
+		var a = new FileReader();
+		a.onload = function(e) {
+			callback(e.target.result);
+		};
+		a.readAsDataURL(blob);
+	}
+	/**
+	 * dataURL转换为Blob对象
+	 * @param {Object} dataurl
+	 */
+	function dataURLtoBlob(dataurl) {
+		var arr = dataurl.split(','),
+			mime = arr[0].match(/:(.*?);/)[1],
+			bstr = atob(arr[1]),
+			n = bstr.length,
+			u8arr = new Uint8Array(n);
+		while(n--) {
+			u8arr[n] = bstr.charCodeAt(n);
+		}
+		return new Blob([u8arr], {
+			type: mime
+		});
+	}
+</script>
+
+</html>

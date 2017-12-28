@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+	<head>
+		<title>angularjs模块 控制器</title>
+		<script src="http://apps.bdimg.com/libs/angular.js/1.2.15/angular.min.js"></script>
+	</head>
+
+	<body>
+		<div ng-app="myapp1">
+			<div ng-controller="mycon1">
+				<input type="button" value="+1" ng-click="click1()" />
+				<p>{{num1}}</p>
+			</div>
+
+			<div ng-controller="mycon2">
+				<input type="button" value="+1" ng-click="click2()" />
+				<p>{{num2}}</p>
+			</div>
+			
+			<div ng-controller="mycon3">
+				<input type="button" value="+1" ng-click="click3()" />
+				<p>{{num3}}</p>
+			</div>
+		</div>
+
+		<div ng-app="myapp3" ng-controller="mycon3">
+			
+		</div>
+		<script>
+			myapp1 = angular.module('myapp1', []);
+			myapp1.controller('mycon1', function($scope) {
+				$scope.num1 = 0;
+				$scope.click1 = function() {
+					$scope.num1 += 1;
+				};
+			});
+			myapp1.controller('mycon2', function($scope) {
+				$scope.num2 = 0;
+				$scope.click2 = function() {
+					$scope.num2 += 1;
+				};
+			});
+
+			myapp1.controller('mycon3', function($scope) {
+				$scope.num3 = 0;
+				$scope.click3 = function() {
+					$scope.num3 += 1;
+				};
+			});
+		</script>
+	</body>
+
+</html>
