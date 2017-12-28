@@ -1,51 +1,62 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<meta charset="UTF-8">
-	<title></title>
-</head>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/constant.js" type="text/javascript" charset="utf-8"></script>
+	</head>
 
-<body>
-	<script>
-		/** 
-		 * @param {String} errorMessage  错误信息 
-		 * @param {String} scriptURI   出错的文件 
-		 * @param {Long}  lineNumber   出错代码的行号 
-		 * @param {Long}  columnNumber  出错代码的列号 
-		 * @param {Object} errorObj    错误的详细信息，Anything 
-		 */
-		window.onerror = function(errorMessage, scriptURI, lineNumber, columnNumber, errorObj) {
-			var s = [];
-			s.push("错误信息：" + errorMessage);
-			s.push("出错文件：" + scriptURI);
-			s.push("出错行号：" + lineNumber);
-			s.push("出错列号：" + columnNumber);
-			s.push("错误详情：" + errorObj);
-			console.log("错误信息：", errorMessage);
-			console.log("出错文件：", scriptURI);
-			console.log("出错行号：", lineNumber);
-			console.log("出错列号：", columnNumber);
-			console.log("错误详情：", errorObj);
-		}
-		var b = {
-			a: 1,
-			b: 2,
-			c: 3
-		};
-
-		function a() {
-			try {
-				const b = 3; // 包含在 if 中的块作用域常量
-				a = 3; // 正常 !
-				b = 4; // 错误 !
-				console.log(b);
-			} catch(e) {
-				throw new Error(e);
+	<body>
+		<div id="error"></div>
+		<script>
+			/** 
+			 * @param {String} errorMessage  错误信息 
+			 * @param {String} scriptURI   出错的文件 
+			 * @param {Long}  lineNumber   出错代码的行号 
+			 * @param {Long}  columnNumber  出错代码的列号 
+			 * @param {Object} errorObj    错误的详细信息，Anything 
+			 */
+			window.onerror = function(errorMessage, scriptURI, lineNumber, columnNumber, errorObj) {
+				var s = [];
+				s.push("错误信息：" + errorMessage);
+				s.push("出错文件：" + scriptURI);
+				s.push("出错行号：" + lineNumber);
+				s.push("出错列号：" + columnNumber);
+				s.push("错误详情：" + errorObj);
+				console.log("错误信息：", errorMessage);
+				console.log("出错文件：", scriptURI);
+				console.log("出错行号：", lineNumber);
+				console.log("出错列号：", columnNumber);
+				console.log("错误详情：", errorObj);
+				//s.push("<br/>错误详情：" + errorObj);
+				console.log(s);
+				showDialog(s, "", "error");
 			}
-		}
-		a();
-	</script>
-</body>
+
+			var b = {
+				a: 1,
+				b: 2,
+				c: 3
+			};
+
+			function a() {
+				try {
+					const b = 3; // 包含在 if 中的块作用域常量
+					a = 3; // 正常 !
+					b = 4; // 错误 !
+					console.log(b);
+				} catch(e) {
+					throw new Error(e);
+				}
+			}
+			a();
+
+			function bb() {
+				a();
+			}
+			bb();
+		</script>
+	</body>
 
 </html>

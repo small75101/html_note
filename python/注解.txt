@@ -1,0 +1,2 @@
+1.pyhton
+2.anaconda

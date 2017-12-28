@@ -59,11 +59,8 @@
 				}
 			]
 		},
-		"video": {
-				
-		},
-		"prevPrograms": [
-		],
+		"video": {},
+		"prevPrograms": [],
 		"liveRecommends": [
 			{
 				"channelNumber": 71,
@@ -93,8 +90,7 @@
 				"providerName": "sctv",
 				"duration": "-4320",
 				"entryName": "北平无战事(31)"
-			},
-			{
+			}, {
 				"programName": "北平无战事(30)",
 				"startTime": "2016-12-25 01:05:01.0",
 				"endTime": "2016-12-25 01:50:20.0",
@@ -130,7 +126,7 @@
 				"wikiId": "577338f935db5ebe468c83a7",
 				"title": "黄金血道",
 				"cover": "http://10.102.1.89:8081/thumb/118/168/1467168992938.jpg"
-			},{
+			}, {
 				"wikiId": "4d007de12f2a241bd7000153",
 				"title": "海棠依旧",
 				"cover": "http://10.102.1.89:8081/thumb/118/168/1405418541107.jpg"

@@ -7,8 +7,8 @@ function scroll(obj) {
 		//obj = document.getElementById(obj);
 		obj = document.getElementsByClassName(obj)[0];
 	}
-	if(!obj)return;
-	if(!obj.temp||(obj.temp.length==obj.innerHTML.length)) {
+	if(!obj) return;
+	if(!obj.temp || (obj.temp.length == obj.innerHTML.length)) {
 		obj.temp = obj.innerHTML;
 		if(obj.scrollWidth != obj.offsetWidth)
 			obj.innerHTML += " " + obj.temp;
@@ -48,10 +48,10 @@ function scrollStart(obj, className) {
 	className = className || "myScrollShow";
 	//移除滚动对象
 	var lastObjArr = document.getElementsByClassName(className);
-	for(var i = 0;i< lastObjArr.length;i++){
-		scrollStop(lastObjArr[i],className);
+	for(var i = 0; i < lastObjArr.length; i++) {
+		scrollStop(lastObjArr[i], className);
 	}
-	
+
 	if(obj) {
 		if((typeof obj) == "string") obj = document.getElementById(obj);
 		obj.classList.add(className);
@@ -77,8 +77,8 @@ function scrollStop(obj, className, real) {
 		obj.classList.remove(className);
 		obj.scrollLeft = 0;
 		obj.style.whiteSpace = "normal"; //超出部分能换行
-		if(obj.temp) obj.innerHTML = obj.temp;
 		//obj.style.textOverflow = "ellipsis"; //超出部分用....符号替换
+		if(obj.temp && (obj.temp.indexOf(obj.innerHTML) != -1)) obj.innerHTML = obj.temp;
 	}
 	if(!document.myscroll) document.myscroll = new Array();
 	if(document.myscroll[className]) document.myscroll[className].stop();
