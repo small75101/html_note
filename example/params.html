@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="showMsg"></div>
+		<script>
+			var http = "http:10.102.2.23:8080/";
+			var url1 = getHttp() + "url1";
+			var url2 = getHttp() + "url2";
+
+			function $(id) {
+				return document.getElementById(id);
+			}
+
+			function show(msg) {
+				$("showMsg").innerHTML = msg;
+			}
+
+			(function() {
+				var a = getParameterByText("http", location.search);
+				var s = a;
+				console.log(http);
+				http = a || http;
+				console.log(http);
+				s += "<br/>http:" + http;
+				s += "<br/>url1:" + url1;
+				s += "<br/>url2:" + url2;
+				show(s);
+			})();
+
+			function getHttp() {
+				console.log(http);
+				return http;
+			}
+
+			function getParameterByText(_text, text) {
+				var ret = (new RegExp("[\\?&]" + _text + "=([^&#]*)")).exec(text);
+				return ret ? ret[1] : null;
+			}
+		</script>
+	</body>
+
+</html>

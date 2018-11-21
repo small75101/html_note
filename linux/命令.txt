@@ -1,0 +1,2 @@
+、批量删除 2天以前的数据
+	find /bakxml/ -mtime +2 -name "*.*" -exec rm -Rf {} \;

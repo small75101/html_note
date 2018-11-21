@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script>
+			var myGame = {
+				row: 8,
+				col: 8,
+				count: 15,
+				start: function() {
+					var row = this.row,
+						col = this.col,
+						count = this.count;
+					var data = new Array();
+					for(var i = 0; i < row; i++) {
+						data[i] = new Array();
+						for(var j = 0; j < col; j++) {
+							data[i][j] = 0;
+						}
+					}
+					while(count > 0) {
+						var vWidth = this.random(row);
+						var vHeight = this.random(col);
+						if(data[vWidth][vHeight] == 0) {
+							data[vWidth][vHeight] = -1;
+							count--;
+						}
+					}
+					for(var i = 0; i < row; i++) {
+						for(var j = 0; j < col; j++) {
+							if(data[i][j] != -1) {
+								data[i][j] = this.calculate(data, i, j);
+							}
+						}
+					}
+					this.print2Arr(data);
+				},
+				getData: function(data, row, col) {
+					if(!data[row])
+						return 0;
+					var cols = data[row];
+					return cols[col];
+				},
+				setData: function(data, row, col, v) {
+					var cols = [];
+					if(data[row] == undefined) {
+						data[row] = cols;
+					} else {
+						cols = data[row];
+					}
+					cols[col] = v;
+				},
+				random: function(i) {
+					return parseInt(Math.random() * i);
+				},
+				calculate: function(data, row, col) {
+					var count = 0;
+					var rows = [row - 1, row, row + 1];
+					var cols = [col - 1, col, col + 1];
+					for(var i = 0; i < rows.length; i++) {
+						for(var j = 0; j < cols.length; j++) {
+							if(rows[i] < 0 || cols[j] < 0) {
+								continue;
+							}
+							if(rows[i] == data.length || cols[j] == data[rows[i]].length) {
+								continue;
+							}
+							if(data[rows[i]][cols[j]] == -1) {
+								count++;
+							}
+						}
+					}
+					return count;
+				},
+				print2Arr: function(data) {
+					var s = "";
+					for(var i = 0; i < data.length; i++) {
+						for(var j = 0; j < data[i].length; j++) {
+							if(data[i][j] < 10 && data[i][j] >= 0) {
+								s += " " + data[i][j] + " "
+							} else {
+								s += data[i][j] + " "
+							}
+						}
+						s += "\n";
+					}
+					console.log(s);
+				}
+
+			};
+			myGame.start();
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

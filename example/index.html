@@ -1,40 +1,65 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-	<meta charset="utf-8" />
-	<title></title>
-	<script type="text/javascript" src="../js/constant.js"></script>
-	<script type="text/javascript" src="../js/jquery.min.js"></script>
-	<style>
-		html {
-			background-color: blue;
-		}
-		body {
-			background-color: aquamarine;
-		}
-	</style>
-</head>
-
-<body>
-	<div id="a1"></div>
-	<div id="a2">aaa</div>
-	<script>
-		console.log("aaaaaaaaaa!cc! ddd|fff!|bbb".replace(/[!\| ]*/g, ""));
-		console.log(typeof "aaa");
-		console.log(typeof 1);
-		console.log(typeof null);
-		console.log(typeof a);
-		console.log(typeof $("#a2"));
-
-		function isEmptyObject1(obj) {
-			for(var key in obj) {
-				return false;
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script type="text/javascript" src="../js/constant.js"></script>
+		<script type="text/javascript" src="../js/jquery.min.js"></script>
+		<style>
+			html {
+				background-color: blue;
 			}
-			return true;
-		}
-		console.log(document.getElementById("aaaa"));
-	</script>
-</body>
+			
+			body {
+				background-color: aquamarine;
+			}
+			
+			.scroll_div span {
+				display: block;
+				width: 100px;
+				border: 1px solid black;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="a1"></div>
+		<div id="a2">aaa</div>
+		<div class="scroll_div" id="scroll">
+			<span>1234567890abcdefghijklmn</span>
+			<span>1234567890abcdefghijklmn</span>
+			<span>1234567890abcdefghijklmn</span>
+			<span>1234567890abcdefghijklmn</span>
+		</div>
+		<script>
+			var curr_scroll = 0;
+			$.getScript("../js/scroll_1.2.js", function() {
+				scrollStart(document.getElementById("scroll").getElementsByTagName("span").item(curr_scroll));
+			});
+			console.log(window.history);
+			console.log("aaaaaaaaaa!cc! ddd|fff!|bbb".replace(/[!\| ]*/g, ""));
+			console.log(typeof "aaa");
+			console.log(typeof 1);
+			console.log(typeof null);
+			console.log(typeof a);
+			console.log(typeof $("#a2"));
+
+			function isEmptyObject1(obj) {
+				for(var key in obj) {
+					return false;
+				}
+				return true;
+			}
+			console.log(document.getElementById("aaaa"));
+			
+			$.get("http://10.102.1.71:9601/portalutil/dvb/asset/1537930383782","",function(data){
+				console.log(data);
+			});
+		</script>
+	</body>
 
 </html>
